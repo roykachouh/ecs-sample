@@ -9,6 +9,6 @@ class HelloEcsControllerTest extends Specification {
         when:
           def result = new HelloEcsController().helloEcs(name)
         then:
-          result == "Hello, " + name
+          result.name == name
     }
 }
