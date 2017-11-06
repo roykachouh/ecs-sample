@@ -3,13 +3,16 @@ version: 0.2
 phases:
   pre_build:
     commands:
+      - echo retrieving gradle image
+      - echo Attempting to build with gradle...
+      - docker run --rm --user "$(id -u):$(id -g)"  --env GRADLE_USER_HOME=/project/.gradle -v "$PWD":/project -w /project --name gradle gradle:alpine gradle build jar
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
   build:
     commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...
-      - gradlew build buildDocker
+      - echo Building Docker image with $IMAGE_TAG
+      - docker build .
+      - echo Tagging Docker image with $IMAGE_TAG
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
   post_build:
     commands:
