@@ -1,3 +1,6 @@
 package com.kachouh.ecs.sample.model
 
-data class Greeting(val name: String)
+data class Greeting(
+        val name: String,
+        val hostname: String
+)
