@@ -17,3 +17,5 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kachouh/$CODEBUILD_BUILD_ID
+      - echo Triggering ECS Deployment
+      - java -jar $CODEBUILD_SRC_DIR/build/libs/project-0.0.1-SNAPSHOT.jar --image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kachouh/$CODEBUILD_BUILD_ID

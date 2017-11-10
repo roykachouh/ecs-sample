@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class EcsClientWiring {
 
     @Bean
-    AmazonECS amazonECS(@Value(("${accessKey}")) String accessKey, @Value("${secretKey}") String secretKey) {
+    public AmazonECS amazonECS(@Value(("${accessKey}")) String accessKey, @Value("${secretKey}") String secretKey) {
         AmazonECSClientBuilder clientBuilder = AmazonECSClientBuilder.standard();
 
         clientBuilder.setCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, secretKey)));
