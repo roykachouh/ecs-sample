@@ -9,11 +9,11 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
       - echo Building Docker image...
       - cp $CODEBUILD_SRC_DIR/build/libs/project-0.0.1-SNAPSHOT.jar ./build/libs/ecs-sample-0.0.1-SNAPSHOT.jar
-      - docker build .
-      - echo Tagging Docker image with $CODEBUILD_BUILD_ID
-      - docker tag $IMAGE_REPO_NAME:$CODEBUILD_BUILD_ID $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker build -t kachouh/$CODEBUILD_BUILD_ID .
+      - echo Tagging Docker image with kachouh/CODEBUILD_BUILD_ID
+      - docker tag kachouh/$CODEBUILD_BUILD_ID $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kachouh/$CODEBUILD_BUILD_ID
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/kachouh/$CODEBUILD_BUILD_ID
