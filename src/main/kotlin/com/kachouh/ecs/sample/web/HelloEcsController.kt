@@ -11,7 +11,7 @@ import java.net.InetAddress
 class HelloEcsController(val fetchClusters: FetchClusters) {
 
     @GetMapping("/hello-ecs")
-    fun helloEcs(@RequestParam(value = "name", defaultValue = "Roy") name: String): Greeting {
+    fun helloEcs(@RequestParam(value = "name", defaultValue = "ecs") name: String): Greeting {
         return Greeting(name, getHost(), fetchClusters.fetch())
     }
 
