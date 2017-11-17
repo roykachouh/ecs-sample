@@ -1,6 +1,6 @@
 package com.kachouh.ecs.sample.ecs
 
-import com.kachouh.ecs.sample.EcsClientWiring
+
 import spock.lang.Requires
 import spock.lang.Specification
 
