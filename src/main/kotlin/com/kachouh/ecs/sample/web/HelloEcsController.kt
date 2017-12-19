@@ -14,7 +14,7 @@ class HelloEcsController(val restTemplate: RestTemplate) {
 
     @GetMapping("/hello-ecs")
     fun helloEcs(@RequestParam(value = "name", defaultValue = "ecs") name: String): Greeting {
-        return Greeting(name, fetchMetadata())
+        return Greeting(name, fetchMetadata(), fetchRuntime())
     }
 
     fun fetchMetadata(): Metadata? {
@@ -23,5 +23,9 @@ class HelloEcsController(val restTemplate: RestTemplate) {
         } catch (e: Exception) {
             null
         }
+    }
+
+    fun fetchRuntime(): com.kachouh.ecs.sample.model.Runtime {
+        return com.kachouh.ecs.sample.model.Runtime(processors = Runtime.getRuntime().availableProcessors())
     }
 }
