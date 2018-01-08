@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
+import java.net.InetAddress
 
 const val METADATA_ENDPOINT = "http://localhost:51678/v1/metadata"
 
@@ -14,7 +15,7 @@ class HelloEcsController(val restTemplate: RestTemplate) {
 
     @GetMapping("/hello-ecs")
     fun helloEcs(@RequestParam(value = "name", defaultValue = "ecs") name: String): Greeting {
-        return Greeting(name, fetchMetadata(), fetchRuntime())
+        return Greeting(name, fetchHostname(), fetchMetadata(), fetchRuntime())
     }
 
     fun fetchMetadata(): Metadata? {
@@ -27,5 +28,9 @@ class HelloEcsController(val restTemplate: RestTemplate) {
 
     fun fetchRuntime(): com.kachouh.ecs.sample.model.Runtime {
         return com.kachouh.ecs.sample.model.Runtime(processors = Runtime.getRuntime().availableProcessors())
+    }
+
+    fun fetchHostname(): String {
+        return InetAddress.getLocalHost().hostName
     }
 }
