@@ -31,6 +31,10 @@ class HelloEcsController(val restTemplate: RestTemplate) {
     }
 
     fun fetchHostname(): String {
-        return InetAddress.getLocalHost().hostName
+        return try {
+            InetAddress.getLocalHost().hostName
+        } catch (e: Exception) {
+            "Could not resolve hostname: " + e.message
+        }
     }
 }
