@@ -6,13 +6,12 @@ import com.amazonaws.services.ecs.AmazonECSClientBuilder
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.context.support.beans
 import org.springframework.web.client.RestTemplate
-import java.lang.System.getenv
 
 fun beans() = beans {
     bean<RestTemplate> { RestTemplateBuilder().build() }
     bean {
-        val accessKey = getenv("accessKey")
-        val secretKey = getenv("secretKey")
+        val accessKey = "fail"
+        val secretKey = "fail"
 
         val clientBuilder = AmazonECSClientBuilder.standard()
 
