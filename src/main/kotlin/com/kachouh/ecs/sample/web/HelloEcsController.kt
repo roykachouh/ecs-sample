@@ -60,7 +60,7 @@ class HelloEcsController(val restTemplate: RestTemplate) {
                 uname = line!!
             }
         } catch (e: Exception) {
-            "Could not resolve hostname: " + e.message
+            "Could not fetch uname: " + e.message
         }
         return uname
     }
