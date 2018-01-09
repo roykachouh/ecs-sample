@@ -10,7 +10,7 @@ import java.net.InetAddress
 
 const val METADATA_ENDPOINT = "http://localhost:51678/v1/metadata"
 
-val RUNTIME = Runtime.getRuntime()
+val RUNTIME = Runtime.getRuntime()!!
 
 @RestController
 class HelloEcsController(val restTemplate: RestTemplate) {
@@ -33,7 +33,8 @@ class HelloEcsController(val restTemplate: RestTemplate) {
         return com.kachouh.ecs.sample.model.Runtime(
                 processors = RUNTIME.availableProcessors(),
                 freeMemory = RUNTIME.freeMemory(),
-                maxMemory = RUNTIME.maxMemory())
+                maxMemory = RUNTIME.maxMemory(),
+                totalMemory = RUNTIME.totalMemory())
     }
 
     fun fetchHostname(): String {
