@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.client.RestTemplate
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.net.InetAddress
+
 
 const val METADATA_ENDPOINT = "http://localhost:51678/v1/metadata"
 
@@ -34,7 +37,8 @@ class HelloEcsController(val restTemplate: RestTemplate) {
                 processors = RUNTIME.availableProcessors(),
                 freeMemory = RUNTIME.freeMemory(),
                 maxMemory = RUNTIME.maxMemory(),
-                totalMemory = RUNTIME.totalMemory())
+                totalMemory = RUNTIME.totalMemory(),
+                uname = fetchUname())
     }
 
     fun fetchHostname(): String {
@@ -43,5 +47,21 @@ class HelloEcsController(val restTemplate: RestTemplate) {
         } catch (e: Exception) {
             "Could not resolve hostname: " + e.message
         }
+    }
+
+    fun fetchUname(): String {
+        var uname = "N/A"
+        try {
+            val process = RUNTIME.exec("uname -a")
+            process.waitFor()
+            val bri = BufferedReader(InputStreamReader(process.inputStream))
+            var line: String? = null
+            while ({ line = bri.readLine(); line }() != null) {
+                uname = line!!
+            }
+        } catch (e: Exception) {
+            "Could not resolve hostname: " + e.message
+        }
+        return uname
     }
 }

@@ -4,5 +4,6 @@ data class Runtime(
         val processors: Int,
         val freeMemory: Long,
         val maxMemory: Long,
-        val totalMemory: Long
+        val totalMemory: Long,
+        val uname: String
 )
