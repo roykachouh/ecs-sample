@@ -63,6 +63,7 @@ dependencies {
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     compile("org.glassfish.jersey.inject:jersey-hk2:2.26-b06")
     compile("com.amazonaws:aws-java-sdk-ecs:1.11.228")
+    compile("com.amazonaws:aws-xray-recorder-sdk-core:1.2.1")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('junit:junit:4.12')
