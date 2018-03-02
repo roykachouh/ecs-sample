@@ -4,3 +4,9 @@ server:
 context:
   initializer:
     classes: com.kachouh.ecs.sample.WiringInitializer
+
+logging:
+  level:
+    com:
+      kachouh: INFO
+  file: /tmp/log.txt

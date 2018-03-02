@@ -65,6 +65,8 @@ dependencies {
     compile("com.amazonaws:aws-java-sdk-ecs:1.11.228")
     compile("com.amazonaws:aws-xray-recorder-sdk-core:1.2.1")
     compile("com.github.docker-java:docker-java:3.0.14")
+    compile("org.apache.logging.log4j:log4j-core:2.8.2")
+    compile("org.apache.logging.log4j:log4j-api:2.8.2")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('junit:junit:4.12')
